@@ -382,7 +382,6 @@ export default {
       this.$http.get(url).then((response) => {
         response.data.product.num = 1;
         vm.product =  response.data.product;
-        console.log('product',response);
         vm.getSameProducts();
         vm.isLoading = false;
       })
@@ -393,7 +392,6 @@ export default {
       let index = vm.wishId.findIndex(id =>{
         return product.id=== id;
       })
-      console.log(index);
       if(index == -1){
         vm.wished.push(product);
         vm.wishId.push(product.id);
@@ -401,7 +399,6 @@ export default {
         vm.wished.splice(index,1);
         vm.wishId.splice(index,1)
       }
-      console.log(vm.wished);
       vm.wished.forEach( item =>{ //把wished中的num修改成1
         item.num=1;
       })
@@ -417,17 +414,14 @@ export default {
       const vm = this;
       vm.isLoading = true;
       this.$http.get(api).then(response => {
-        console.log("getProducts",response.data);
         this.sameClassProduct = response.data.products.filter( item => {
           return item.category === vm.product.category;
-        }) 
-        console.log("同類產品",vm.sameClassProduct)
+        }); 
         vm.isLoading = false;
       });
     },
     changeProductPage(id){
       let vm =this;
-      console.log(id);
       vm.getProduct(id);
       window.scrollTo(0, 0);
     },
@@ -440,7 +434,6 @@ export default {
         qty
       };
       this.$http.post(url, { data:cart}).then((response) => {
-        console.log("addToCart",response);
         vm.getCartLength();
       vm.status.loadingItem = "";
       });
@@ -448,7 +441,6 @@ export default {
   },
   created(){
     this.getCartLength();
-    console.log(this.$route.params.id);
     this.id = this.$route.params.id
     this.getProduct(this.id);
     // this.getProducts();

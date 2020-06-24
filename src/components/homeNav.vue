@@ -234,7 +234,6 @@ export default {
   mounted(){
     let vm =this;
     vm.$bus.$on("updateCartNum", num => {
-      console.log("Cartnum",num);
       vm.cartLength = num;
     })
   }

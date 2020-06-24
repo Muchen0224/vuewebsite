@@ -212,7 +212,6 @@ export default {
       const vm = this;
       vm.isLoading = true;
       this.$http.get(api).then(response => {
-        console.log("getProducts",response.data);
         vm.isLoading = false;
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
@@ -227,7 +226,6 @@ export default {
         qty
       };
       this.$http.post(url, { data:cart}).then((response) => {
-        console.log("addToCart",response);
         vm.getCartLength();
         vm.status.loadingItem = '';
       });
@@ -248,7 +246,6 @@ export default {
       let index = vm.wishId.findIndex(id =>{
         return product.id=== id;
       })
-      console.log(index);
       if(index == -1){
         vm.wished.push(product);
         vm.wishId.push(product.id);
@@ -256,7 +253,6 @@ export default {
         vm.wished.splice(index,1);
         vm.wishId.splice(index,1)
       }
-      console.log(vm.wished);
       vm.wished.forEach( item =>{ //把wished中的num修改成1
         item.num=1;
       })
@@ -289,7 +285,6 @@ export default {
   created() {
     let vm=this;
     vm.$bus.$on("changeFilter", category => {
-      console.log("here",category);
       vm.filter = category;
     });
     this.getProducts();

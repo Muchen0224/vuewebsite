@@ -261,7 +261,6 @@ export default {
       vm.isLoading = true;
       this.$http.get(url).then((response) => {
         vm.cart = response.data.data;
-        console.log(response);
         vm.isLoading = false;
       })
     },
@@ -280,7 +279,6 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       vm.isLoading = true;
       this.$http.delete(url).then((response) => {
-        console.log(response);
         this.getCart();
         this.getCartLength();
         vm.isLoading = false;
@@ -294,7 +292,6 @@ export default {
       };
       vm.isLoading = true;
       this.$http.post(url , { data:coupon}).then((response) => {
-        console.log(response);
         vm.isLoading = false;
         vm.getCart();
       })

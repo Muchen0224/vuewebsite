@@ -226,7 +226,6 @@ export default {
         qty
       };
       this.$http.post(url, { data:cart}).then((response) => {
-        console.log(response,"id",id);
         //刪除加入購物車的願望清單
         vm.getCartLength();
         vm.removeWishListItem(id);
@@ -255,7 +254,6 @@ export default {
   created(){
     let vm =this;
     vm.$bus.$on("updateWishList", (products,Ids) => {
-      console.log(products,Ids);
       vm.wishList = products;
       vm.wishListId = Ids;
     })

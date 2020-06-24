@@ -248,7 +248,6 @@ export default {
       const vm = this;
       vm.isLoading = true;
       this.$http.get(api).then(response => {
-        console.log(response.data);
         vm.isLoading = false;
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
@@ -282,9 +281,7 @@ export default {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
         httpMethod = "delete";
       }
-      console.log(process.env.VUE_APP_APIPATH, process.env.VUE_APP_CUSTOMPATH);
       this.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
-        console.log(response.data);
         let modal = "#productModal";
         if (vm.openModalType == "delete") {
           modal = "#delProductModal";
@@ -300,7 +297,6 @@ export default {
       });
     },
     upLoadFile() {
-      console.log(this);
       const upLoadedFile = this.$refs.files.files[0];
       const vm = this;
       const formData = new FormData();
@@ -314,11 +310,8 @@ export default {
           }
         })
         .then(response => {
-          console.log(response.data);
           vm.status.fileUploading = false;
           if (response.data.success) {
-            // vm.tempProduct.imageUrl = response.data.imageUrl;
-            // console.log(vm.tempProduct);
             vm.$set(vm.tempProduct, "imageUrl", response.data.imageUrl);
           } else {
             this.$bus.$emit("message:push", response.data.message, "danger");

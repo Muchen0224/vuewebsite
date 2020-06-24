@@ -179,7 +179,6 @@ export default {
       const order = vm.form;
       vm.isLoading = true;
       this.$http.post(url , { data:order}).then((response) => {
-        console.log('訂單已建立',response);
         vm.getCartLength();
         if(response.data.success){
           vm.$router.push(`/payment/${response.data.orderId}`)
@@ -203,7 +202,6 @@ export default {
       vm.isLoading = true;
       this.$http.get(url).then((response) => {
         vm.cart = response.data.data;
-        console.log(response);
         vm.isLoading = false;
       })
     }

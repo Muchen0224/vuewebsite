@@ -176,7 +176,6 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       const vm = this;
       this.$http.get(api).then(response => {
-        console.log("getNewProducts",response.data);
         vm.newProduct = response.data.products.filter( item => {
           let index = vm.newProductList.findIndex( item1 => item1===item.title);
           if(index==-1){
@@ -185,7 +184,6 @@ export default {
             return true;
           }
         })
-        console.log('new',vm.newProduct);
       });
     }
   },
