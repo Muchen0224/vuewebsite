@@ -37,10 +37,10 @@
 
 <script>
 export default {
-  props:['pagination'],
+  props: ['pagination'],
   methods: {
-    changePage(page) {
-      this.$emit("turnPage", page);
+    changePage (page) {
+      this.$emit('turnPage', page)
     }
   }
 }

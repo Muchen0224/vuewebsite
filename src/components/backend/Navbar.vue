@@ -30,14 +30,14 @@
 
 <script>
 export default {
-  name:'Navbar',
-  methods:{
-    signout(){
-      const vm =this;
-      const url = `${process.env.VUE_APP_APIPATH}/logout`;
+  name: 'Navbar',
+  methods: {
+    signout () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/logout`
       this.$http.post(url).then((response) => {
-        if(response.data.success){
-          vm.$router.push('/signin');         
+        if (response.data.success) {
+          vm.$router.push('/signin')
         }
       })
     }

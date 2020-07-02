@@ -1,4 +1,4 @@
-export default  function(price){
-    let newPirce = Math.floor(price);
-    return newPirce;
+export default function (price) {
+  const newPirce = Math.floor(price)
+  return newPirce
 }

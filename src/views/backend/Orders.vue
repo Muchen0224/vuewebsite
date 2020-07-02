@@ -31,54 +31,52 @@
         </tr>
       </tbody>
     </table>
-    <Pagination :pagination='pagination' @turnPage="getOrders"></Pagination>
+    <Pagination :pagination="pagination" @turnPage="getOrders"></Pagination>
   </div>
 </template>
 
 <script>
-
 import Pagination from '@/components/Pagination'
 
 export default {
-  data(){
+  data () {
     return {
-      orders:[],
-      pagination:{},
-      isLoading: false,
+      orders: [],
+      pagination: {},
+      isLoading: false
     }
   },
-  components:{
+  components: {
     Pagination
   },
-  methods:{
-    getOrders( Page = 1){
-        const vm = this;
-        const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${Page}`;
-        vm.isLoading = true;
-        this.$http.get(url, vm.tempProduct).then((response) => {
-        vm.orders = response.data.orders;
-        vm.pagination = response.data.pagination;
-        vm.isLoading = false;
-      });
-    },
-  },
-  computed:{
-    sortOrder(){ 
-      const vm =this;
-      let newOrder = [];
-      if(vm.orders.length){
-        newOrder = vm.orders.sort((a,b) => {
-          const aIsPaid = a.is_paid ? 1 : 0;
-          const bIsPaid = b.is_paid ? 1 : 0;
-          return bIsPaid - aIsPaid;
-        })
-      }
-      return newOrder;
+  methods: {
+    getOrders (Page = 1) {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${Page}`
+      vm.isLoading = true
+      this.$http.get(url, vm.tempProduct).then(response => {
+        vm.orders = response.data.orders
+        vm.pagination = response.data.pagination
+        vm.isLoading = false
+      })
     }
   },
-  created() {
-    this.getOrders();
+  computed: {
+    sortOrder () {
+      const vm = this
+      let newOrder = []
+      if (vm.orders.length) {
+        newOrder = vm.orders.sort((a, b) => {
+          const aIsPaid = a.is_paid ? 1 : 0
+          const bIsPaid = b.is_paid ? 1 : 0
+          return bIsPaid - aIsPaid
+        })
+      }
+      return newOrder
+    }
+  },
+  created () {
+    this.getOrders()
   }
 }
-
 </script>

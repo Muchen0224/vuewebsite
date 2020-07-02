@@ -28,15 +28,15 @@
       <div class="container">
         <div class="row align-items-center">
           <div id="logo" class="col-6 col-md-3"><router-link to="/" class="d-block"><img src="@/assets/img/logo.png" class="img-fluid" alt=""></router-link></div>
-          <div class="nav d-none d-md-block col-md-6 text-md-right">
-            <ul>
+          <div class="nav d-none d-md-block col-md-7 text-md-right">
+            <ul class="col">
               <li><router-link to="/">首頁</router-link></li>
               <li><router-link to="/about">關於我們</router-link></li>
               <li><router-link to="/shoppage">商品列表</router-link></li>
               <li><router-link to="/location">實體店面</router-link></li>
             </ul>
           </div>
-          <div class="userarea col-6 col-md-3">
+          <div class="userarea col-6 col-md-2">
             <ul class="d-flex justify-content-end">
               <li class="d-none d-md-block">
                 <ul>
@@ -67,8 +67,6 @@
   transform: translateX(270px);
   }
 
-
-
   .side-menu-background{
   position: absolute;
   top: 0;
@@ -86,7 +84,6 @@
   }
 
   #side-mobile-menu .site-logo img{
-    width: 60px;
     height: 60px;
     margin: 15px auto 0px;
     display: block;
@@ -155,8 +152,7 @@
   }
 
   #header .row #logo img{
-    width: 65px;
-    height: 65px;
+    height: 55px;
   }
 
   #header .row .nav ul li{
@@ -171,7 +167,7 @@
 
   #header .userarea ul li{
     display: inline-block;
-    margin-right: 17px;
+    margin-right: 5px;
   }
 
   #header .userarea i{
@@ -200,41 +196,48 @@
     }
   }
 
+  @media(min-width:1024px){
+    #header .userarea ul li{
+    display: inline-block;
+    margin-right: 15px;
+    }
+  }
+
 </style>
 
 <script>
 export default {
-  props:[
+  props: [
     // 'cartLength'
   ],
-  data(){
+  data () {
     return {
-      sideMenu:false,
-      cartLength:""
+      sideMenu: false,
+      cartLength: ''
     }
   },
-  methods:{
-    ToggleSideMenu() {
-      this.$emit("openSideMenu");
+  methods: {
+    ToggleSideMenu () {
+      this.$emit('openSideMenu')
     },
-    getCartLength(){
-      const vm =this;
+    getCartLength () {
+      const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.isLoading = true;
+      vm.isLoading = true
       this.$http.get(url).then((response) => {
-        vm.cartLength = response.data.data.carts.length;
-        vm.isLoading = false;
+        vm.cartLength = response.data.data.carts.length
+        vm.isLoading = false
       })
     }
   },
-  created(){
-    let vm =this;
-    vm.getCartLength();
+  created () {
+    const vm = this
+    vm.getCartLength()
   },
-  mounted(){
-    let vm =this;
-    vm.$bus.$on("updateCartNum", num => {
-      vm.cartLength = num;
+  mounted () {
+    const vm = this
+    vm.$bus.$on('updateCartNum', num => {
+      vm.cartLength = num
     })
   }
 }

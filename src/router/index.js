@@ -1,99 +1,97 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-
-
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
-    //避免用戶進入不存在的頁面
-    path:'*',
-    redirect:'/login'
+    // 避免用戶進入不存在的頁面
+    path: '*',
+    redirect: '/login'
   },
   {
-    path:'/login',
-    name:'Login',
-    component: () => import('@/components/pages/Login'),
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/backend/Login')
   },
   {
     path: '/admin',
     name: 'Dashboard',
-    component: () => import('@/components/Dashboard'),
-    children:[
+    component: () => import('@/views/backend/Dashboard'),
+    children: [
       {
-        path:'products',
-        name:'products',
-        component: () => import('@/components/pages/products'),
-        meta: { requiresAuth: true },
+        path: 'products',
+        name: 'products',
+        component: () => import('@/views/backend/Products'),
+        meta: { requiresAuth: true }
       },
       {
-        path:'orders',
-        name:'orders',
-        component: () => import('@/components/pages/orders'),
-        meta: { requiresAuth: true },
+        path: 'orders',
+        name: 'orders',
+        component: () => import('@/views/backend/Orders'),
+        meta: { requiresAuth: true }
       },
       {
-        path:'coupons',
-        name:'coupons',
-        component: () => import('@/components/pages/coupons'),
-        meta: { requiresAuth: true },
+        path: 'coupons',
+        name: 'coupons',
+        component: () => import('@/views/backend/Coupons'),
+        meta: { requiresAuth: true }
       }
-    ],
+    ]
   },
   {
     path: '/catshop_home',
-    alias:'/',
+    alias: '/',
     name: 'catShop',
-    component: () => import('@/components/pages/catShop'),
-    children:[
+    component: () => import('@/views/frontend/CatShop'),
+    children: [
       {
         path: '/catshop_home',
         name: 'shopHome',
-        component: () => import('@/components/pages/catShopHome'),
+        component: () => import('@/views/frontend/CatShopHome')
       },
       {
         path: '/about',
         name: 'About',
-        component: () => import('@/components/pages/ourStory'),
+        component: () => import('@/views/frontend/OurStory')
       },
       {
         path: '/shoppage',
         name: 'ShopPage',
-        component: () => import('@/components/pages/shoppage'),
+        component: () => import('@/views/frontend/Shoppage')
       },
       {
-        path:'/shopItem/:id',
-        name:'ShopItem',
-        component: () => import('@/components/pages/shopsItem'),
+        path: '/shopItem/:id',
+        name: 'ShopItem',
+        component: () => import('@/views/frontend/ShopsItem')
       },
       {
         path: '/location',
         name: 'Location',
-        component: () => import('@/components/pages/location'),
+        component: () => import('@/views/frontend/Location')
       },
       {
-        path:'/wishlist',
-        name:'WishList',
-        component: () => import('@/components/pages/wishList'),
+        path: '/wishlist',
+        name: 'WishList',
+        component: () => import('@/views/frontend/WishList')
       },
       {
-        path:'/cart',
-        name:'Cart',
-        component: () => import('@/components/pages/cart'),
+        path: '/cart',
+        name: 'Cart',
+        component: () => import('@/views/frontend/Cart')
       },
       {
-        path:'/checkout',
-        name:'Check',
-        component: () => import('@/components/pages/checkout'),
+        path: '/checkout',
+        name: 'Check',
+        component: () => import('@/views/frontend/Checkout')
       },
       {
-        path:'/payment/:orderId',
-        name:'Payment',
-        component: () => import('@/components/pages/payment'),
-      },
+        path: '/payment/:orderId',
+        name: 'Payment',
+        component: () => import('@/views/frontend/Payment')
+      }
     ]
-  },
+  }
 ]
 
 const router = new VueRouter({

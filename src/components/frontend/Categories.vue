@@ -5,9 +5,6 @@
         <div class="title">商品分類</div>
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-4 category cat-food">
-            <!-- <router-link to="/shoppage" @click.prevent="category='貓食'">
-              <img src="@/assets/img/catfood.jpg" class="img-fluid" alt="">
-            </router-link> -->
             <a href="#" class="d-block" @click.prevent="goToShopPage('貓食')">
               <img src="@/assets/img/catfood.jpg" class="img-fluid" alt="">
               <div class="text-wrap">
@@ -15,7 +12,7 @@
                 <h3>貓食</h3>
               </div>
             </a>
-            
+
           </div>
           <div class="col-sm-12 col-md-6 col-lg-4 category other">
             <a href="#" class="d-block"  @click.prevent="goToShopPage('貓抓板')">
@@ -52,11 +49,8 @@
   .categories .category{
     position: relative;
     margin-bottom: 30px;
+    overflow: hidden;
   }
-
-  /* .categories .category a img{
-    height: 230px;
-  } */
 
   .categories .category .text-wrap{
     position: absolute;
@@ -65,38 +59,34 @@
     color: black;
   }
 
-  /* @media(min-width:768px){
-
-    .categories .cat-food img{
-      height: 242px;
-    }
+  .categories .category img{
+    transform: scale(1,1);
+    transition: all 0.5s ease-out;
   }
 
-  @media(min-width:1024px){
-    .categories .cat-food img{
-      height: 330px;
-    }
-  } */
+  .categories .category img:hover{
+    transform:scale(1.2,1.2);
+  }
 </style>
 
 <script>
 
 export default {
-  data() {
+  data () {
     return {
-      category:""
+      category: ''
     }
   },
-  methods:{
-    goToShopPage(category){
-      let vm =this;
-      vm.category = category;
-      vm.$router.push('/shoppage');
+  methods: {
+    goToShopPage (category) {
+      const vm = this
+      vm.category = category
+      vm.$router.push('/shoppage')
     }
   },
-  beforeDestroy(){
-    let vm =this;
-    vm.$bus.$emit("changeFilter",vm.category);
+  beforeDestroy () {
+    const vm = this
+    vm.$bus.$emit('changeFilter', vm.category)
   }
 }
 </script>

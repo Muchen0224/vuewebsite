@@ -13,15 +13,12 @@
   </div>
 </template>
 
-
-
-
 <script>
-import Navbar from './navbar'
-import Sidebar from './sidebar'
-import Alert from './alertMessage'
+import Navbar from '@/components/backend/Navbar.vue'
+import Sidebar from '@/components/backend/Sidebar.vue'
+import Alert from '@/components/AlertMessage.vue'
 export default {
-  components:{
+  components: {
     Navbar,
     Sidebar,
     Alert

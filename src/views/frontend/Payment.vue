@@ -3,7 +3,9 @@
     <div id="content">
       <div class="route">
         <div class="container">
-          <router-link to="/">首頁</router-link><span class="routeDivider">/</span><span class="current">完成訂單</span>
+          <router-link to="/">首頁</router-link>
+          <span class="routeDivider">/</span>
+          <span class="current">完成訂單</span>
         </div>
       </div>
       <div class="thanks">
@@ -63,61 +65,66 @@
           </table>
           <div class="text-right my-3" v-if="order.is_paid === false">
             <div class="row justify-content-center">
-            <button class="btn btn-danger col-6">確認付款去</button>
+              <button class="btn btn-danger col-6">確認付款去</button>
+            </div>
+          </div>
+          <div class="text-right my-3" v-if="order.is_paid === true">
+            <div class="row justify-content-center">
+              <router-link to="/shoppage" class="btn btn-primary btnsm">繼續購物</router-link>
             </div>
           </div>
         </form>
-    </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-  #content .route{
-    background-color: #eee;
-    padding: 15px 0px;
-  }
+#content .route {
+  background-color: #eee;
+  padding: 15px 0px;
+}
 
-  #content .route .routeDivider{
-    margin: 0px 8px;
-  }
+#content .route .routeDivider {
+  margin: 0px 8px;
+}
 </style>
 
 <script>
 export default {
-  data(){
+  data () {
     return {
-      order:{
-        user:{}
+      order: {
+        user: {}
       },
-      orderId: ""
+      orderId: ''
     }
   },
-  methods:{
-    getOrder() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
-      vm.isLoading = true;
-      this.$http.get(url).then(response => {
-        this.order = response.data.order;
-        vm.isLoading = false;
-      });
+  methods: {
+    getOrder () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`
+      vm.isLoading = true
+      vm.$http.get(url).then(response => {
+        this.order = response.data.order
+        vm.isLoading = false
+      })
     },
-    payOrder(){
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-      vm.isLoading = true;
-      this.$http.post(url).then(response => {
-        if(response.data.success){
-          vm.getOrder();
+    payOrder () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`
+      vm.isLoading = true
+      vm.$http.post(url).then(response => {
+        if (response.data.success) {
+          vm.getOrder()
         }
-        vm.isLoading = false;
-      });
+        vm.isLoading = false
+      })
     }
   },
-  created(){
-    this.orderId = this.$route.params.orderId;
-    this.getOrder();
+  created () {
+    this.orderId = this.$route.params.orderId
+    this.getOrder()
   }
 }
 </script>

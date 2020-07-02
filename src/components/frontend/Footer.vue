@@ -40,6 +40,12 @@
 </template>
 
 <style scoped>
+  /* #footer{
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+} */
+
   #footer .contact-us .title{
   text-align: center;
   font-size: 30px;
@@ -100,6 +106,6 @@
 <script>
 
 export default {
-  
+
 }
 </script>
