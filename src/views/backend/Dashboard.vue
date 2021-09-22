@@ -16,7 +16,7 @@
 <script>
 import Navbar from '@/components/backend/Navbar.vue'
 import Sidebar from '@/components/backend/Sidebar.vue'
-import Alert from '@/components/AlertMessage.vue'
+import Alert from '@/components/alertMessage.vue'
 export default {
   components: {
     Navbar,
